@@ -11,9 +11,32 @@ import { useEffect, useState } from "react";
 function App() {
     const [data, setData] = useState([]);
 
+    // const addData = (e) => {
+    //     const newCode = Math.floor(1000 + Math.random() * 9000);
+    //     setData((prevData) => [...prevData, { ...e, code: newCode }]);
+
+    //     setTimeout(() => {
+    //         localStorage.setItem(
+    //             "moneyData",
+    //             JSON.stringify([...data, { ...e, code: newCode }])
+    //         );
+    //     }, 100);
+    // };
+
     const addData = (e) => {
         const newCode = Math.floor(1000 + Math.random() * 9000);
-        setData((prevData) => [...prevData, { ...e, code: newCode }]);
+
+        const existingItemIndex = data.findIndex(
+            (item) => item.title === e.title
+        );
+
+        if (existingItemIndex !== -1) {
+            const newData = [...data];
+            newData[existingItemIndex].value += e.value;
+            setData(newData);
+        } else {
+            setData((prevData) => [...prevData, { ...e, code: newCode }]);
+        }
 
         setTimeout(() => {
             localStorage.setItem(
