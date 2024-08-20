@@ -1,4 +1,12 @@
-const ListCard = () => {
+const ListCard = ({data, deleteData}) => {
+    function formatRupiah(number) {
+        const formatter = new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR",
+            minimumFractionDigits: 0,
+        });
+        return formatter.format(number);
+    }
     return (
         <>
             <div className='col-md-7'>
@@ -12,27 +20,26 @@ const ListCard = () => {
                                     <th scope='col'>Judul</th>
                                     <th scope='col'>Jumlah</th>
                                     <th scope='col'>Jenis</th>
+                                    <th scope='col'>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope='row'>1</th>
-                                    <td>Gaji Bulanan</td>
-                                    <td>Rp. 2.000.000</td>
-                                    <td>Pemasukan</td>
-                                </tr>
-                                <tr>
-                                    <th scope='row'>2</th>
-                                    <td>Makan</td>
-                                    <td>Rp. 800.000</td>
-                                    <td>Pengeluaran</td>
-                                </tr>
-                                <tr>
-                                    <th scope='row'>3</th>
-                                    <td>Kosan</td>
-                                    <td>Rp. 800.000</td>
-                                    <td>Pengeluaran</td>
-                                </tr>
+                                {data.map((item, index) => (
+                                    <tr key={index}>
+                                        <th scope='row'>{index + 1}</th>
+                                        <td>{item.title}</td>
+                                        <td>{formatRupiah(item.value)}</td>
+                                        <td>{item.type === 1 ? "Pemasukan" : "Pengeluaran" } </td>
+                                        <td>
+                                            <button
+                                                className='btn btn-danger'
+                                                onClick={() => deleteData(item.code)}
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>

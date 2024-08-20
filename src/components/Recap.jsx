@@ -1,8 +1,8 @@
 const Recap = ({ data }) => {
-    let totalInput = 3000000;
-    let totalOutput = 2000000;
-    
-    data.forEach(item => {
+    let totalInput = 0;
+    let totalOutput = 0;
+
+    data.forEach((item) => {
         if (item.type === 1) {
             totalInput += item.value;
         } else if (item.type === 2) {
@@ -14,7 +14,6 @@ const Recap = ({ data }) => {
     const allTotalOutput = totalOutput;
     const allTotalBalance = totalInput - totalOutput;
 
-    
     function formatRupiah(number) {
         const formatter = new Intl.NumberFormat("id-ID", {
             style: "currency",
@@ -37,7 +36,9 @@ const Recap = ({ data }) => {
 
                                 <div className='ms-3'>
                                     <h4 className='mb-0'>Total Uang</h4>
-                                    <p className='mb-0'>{formatRupiah (allTotalBalance)}</p>
+                                    <p className='mb-0'>
+                                        {formatRupiah(allTotalBalance)}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +55,9 @@ const Recap = ({ data }) => {
 
                                 <div className='ms-3'>
                                     <h4 className='mb-0'>Pemasukan</h4>
-                                    <p className='mb-0'>{formatRupiah (allTotalInput)}</p>
+                                    <p className='mb-0'>
+                                        {formatRupiah(allTotalInput)}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +74,9 @@ const Recap = ({ data }) => {
 
                                 <div className='ms-3'>
                                     <h4 className='mb-0'>Pengeluaran</h4>
-                                    <p className='mb-0'>{formatRupiah (allTotalOutput) }</p>
+                                    <p className='mb-0'>
+                                        {formatRupiah(allTotalOutput)}
+                                    </p>
                                 </div>
                             </div>
                         </div>
